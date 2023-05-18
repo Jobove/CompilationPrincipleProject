@@ -3,7 +3,6 @@
 //
 
 #include "DFA.h"
-#include "DisjointSet.h"
 #include <functional>
 #include <iostream>
 
@@ -70,7 +69,7 @@ DFA::DFA(const std::string &postfix) : NFA(postfix) {
         function(root, id);
     };
 
-    for (auto &[id, state] : id_to_state) {
+    for (auto &[id, state]: id_to_state) {
         if (not state->symbol)
             continue;
 
@@ -78,7 +77,7 @@ DFA::DFA(const std::string &postfix) : NFA(postfix) {
         not_epsilon[id] = std::make_pair(state->symbol, next);
     }
 
-    for (auto &[u, pair] : not_epsilon) {
+    for (auto &[u, pair]: not_epsilon) {
         int v = pair.second;
 
         visited.clear();
@@ -90,23 +89,23 @@ DFA::DFA(const std::string &postfix) : NFA(postfix) {
     int count = 0;
     std::map<int, int> former_id_to_id;
 
-    for (auto &[former_id, epsilon] : reach_epsilon) {
+    for (auto &[former_id, epsilon]: reach_epsilon) {
         former_id_to_id[former_id] = ++count;
 
         int id = count;
         auto *now = new Node{
-            id,
-            std::map<char, Node *>(),
-            former_id,
-            epsilon
+                id,
+                std::map<char, Node *>(),
+                former_id,
+                epsilon
         };
 
         id_to_node[id] = now;
         node_to_id[now] = id;
     }
 
-    for (auto &[former_id, pair] : not_epsilon) {
-        for (auto &[p, id] : node_to_id) {
+    for (auto &[former_id, pair]: not_epsilon) {
+        for (auto &[p, id]: node_to_id) {
             if (!(p->former_id == former_id or p->epsilon.find(former_id) != p->epsilon.end()))
                 continue;
 
@@ -116,17 +115,15 @@ DFA::DFA(const std::string &postfix) : NFA(postfix) {
 }
 
 void DFA::output() {
-    std::cout << "<--------------------Outputting NFA Result-------------------->\n";
     NFA::output();
-    std::cout << "<---------------Finished Outputting NFA Result--------------->\n";
 
-    std::cout << "<--------------------Outputting DFA Result------------------->\n";
-    for (auto &[id, p] : id_to_node) {
+    std::cout << "<--------------------Outputting DFA Result------------------->" << std::endl;
+    for (auto &[id, p]: id_to_node) {
         std::cout << "id: " << id << ". Sons: ";
-        for (auto &[ch, v] : id_to_node[id]->edges) {
+        for (auto &[ch, v]: id_to_node[id]->edges) {
             std::cout << '(' << ch << ", " << node_to_id[v] << ") ";
         }
         std::cout << std::endl;
     }
-    std::cout << "<---------------Finished Outputting DFA Result--------------->\n";
+    std::cout << "<---------------Finished Outputting DFA Result--------------->" << std::endl;
 }

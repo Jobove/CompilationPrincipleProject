@@ -20,7 +20,9 @@ bool is_operator(char ch) {
     return operators.find(ch) != operators.end();
 }
 
-State::State(int is_receive_, char symbol_) : id(++count), is_receive(is_receive_), symbol(symbol_) {
+State::State(int is_receive_, char symbol_) : is_receive(is_receive_), symbol(symbol_) {
+    static int count = 0;
+    id = ++count;
     left = right = nullptr;
 }
 
@@ -35,8 +37,6 @@ void State::set_next(State *nxt) {
 void State::set_next(State &nxt) {
     set_next(&nxt);
 }
-
-int State::count = 0;
 
 Fragment::Fragment(State *in_, State *out_) : in(in_), out(out_) {}
 
@@ -234,6 +234,7 @@ void NFA::refactor() {
 }
 
 void NFA::output() {
+    std::cout << "<--------------------Outputting NFA Result-------------------->" << std::endl;
     for (auto &[id, State]: id_to_state) {
         std::cout << "id: " << id << ". Sons: ";
         for (auto const &i: son[id]) {
@@ -241,4 +242,5 @@ void NFA::output() {
         }
         std::cout << std::endl;
     }
+    std::cout << "<---------------Finished Outputting NFA Result--------------->" << std::endl;
 }

@@ -18,9 +18,7 @@ struct Node {
 };
 
 class DFA : NFA {
-private:
-    bool minimized = false;
-
+protected:
     Node *node = nullptr;
 
     std::map<int, Node *> id_to_node;

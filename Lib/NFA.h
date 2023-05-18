@@ -13,9 +13,7 @@
 using std::string;
 
 struct State {
-    static int count;
-
-    int const id;
+    int id;
 
     bool is_receive;
 

@@ -3,6 +3,7 @@
 #include "Lib/Postfix.h"
 #include "Lib/NFA.h"
 #include "Lib/DFA.h"
+#include "MinimizedDFA.h"
 
 using std::cout;
 using std::endl;
@@ -16,7 +17,7 @@ int main() {
 
     cout << postfix->get_result() << endl;
 
-    auto *dfa = new DFA(postfix->get_result());
+    auto *dfa = new MinimizedDFA(postfix->get_result());
 
     dfa->output();
 

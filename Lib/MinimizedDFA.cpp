@@ -26,7 +26,8 @@ MinimizedDFA::MinimizedDFA(const std::string &postfix) : DFA(postfix) {
 
         int id = ++count;
         auto *now = new Node{
-                .id = id
+                .id = id,
+                .is_receive = id_to_node[i]->is_receive
         };
 
         former_id_to_id[i] = id;
@@ -42,6 +43,8 @@ MinimizedDFA::MinimizedDFA(const std::string &postfix) : DFA(postfix) {
             id_to_minimized_node[u]->edges[ch] = id_to_minimized_node[v];
         }
     }
+
+    minimized_node = id_to_minimized_node[1];
 }
 
 void MinimizedDFA::output() {
@@ -56,4 +59,22 @@ void MinimizedDFA::output() {
         std::cout << std::endl;
     }
     std::cout << "<----------Finished Outputting Minimized DFA Result---------->" << std::endl;
+}
+
+bool MinimizedDFA::match(const string &str) {
+    bool result = true;
+    auto *p = minimized_node;
+
+    for (auto const &ch : str) {
+        if (p == nullptr) {
+            result = false;
+            break;
+        }
+
+        auto edges = p->edges;
+        auto next = edges[ch];
+        p = next;
+    }
+
+    return result and p and p->is_receive;
 }

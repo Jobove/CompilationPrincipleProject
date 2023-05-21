@@ -12,7 +12,7 @@ int main() {
     Postfix *postfix;
 
     postfix = new Postfix(
-            "l(l|d)*"
+            "l(l|d)*l"
             );
 
     cout << postfix->get_result() << endl;
@@ -20,6 +20,8 @@ int main() {
     auto *dfa = new MinimizedDFA(postfix->get_result());
 
     dfa->output();
+
+    cout << dfa->match("lll") << endl;
 
     return 0;
 }

@@ -19,6 +19,8 @@ public:
     explicit MinimizedDFA(const std::string &postfix);
 
     void output() override;
+
+    bool match(const string &str);
 };
 
 

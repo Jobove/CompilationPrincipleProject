@@ -45,36 +45,54 @@ DFA::DFA(const std::string &postfix) : NFA(postfix) {
 
             auto p = id_to_state[id];
 
-            if (p->symbol)
-                return;
+            for (auto &[ch, v] : p->edges) {
+                if (ch)
+                    continue;
 
-            if (p->left) {
-                int const left = state_to_id[p->left];
+                int const next = state_to_id[v];
 
-                reach_epsilon[root].insert(left);
-//                reach_epsilon[id_to_state[root]->id].insert(p->left->id);
-                if (not visited[left])
-                    function(root, left);
+                reach_epsilon[root].insert(next);
+                if (not visited[next])
+                    function(root, next);
             }
 
-            if (p->right) {
-                int const right = state_to_id[p->right];
-
-                reach_epsilon[root].insert(right);
-//                reach_epsilon[id_to_state[root]->id].insert(p->right->id);
-                if (not visited[right])
-                    function(root, right);
-            }
+//            if (p->symbol)
+//                return;
+//
+//            if (p->left) {
+//                int const left = state_to_id[p->left];
+//
+//                reach_epsilon[root].insert(left);
+////                reach_epsilon[id_to_state[root]->id].insert(p->left->id);
+//                if (not visited[left])
+//                    function(root, left);
+//            }
+//
+//            if (p->right) {
+//                int const right = state_to_id[p->right];
+//
+//                reach_epsilon[root].insert(right);
+////                reach_epsilon[id_to_state[root]->id].insert(p->right->id);
+//                if (not visited[right])
+//                    function(root, right);
+//            }
         };
         function(root, id);
     };
 
     for (auto &[id, state]: id_to_state) {
-        if (not state->symbol)
-            continue;
+        for (auto &[ch, v] : state->edges) {
+            if (not ch)
+                continue;
 
-        int next = state_to_id[state->left];
-        not_epsilon[id] = std::make_pair(state->symbol, next);
+            int next = state_to_id[v];
+            not_epsilon[id] = std::make_pair(ch, next);
+        }
+//        if (not state->symbol)
+//            continue;
+//
+//        int next = state_to_id[state->left];
+//        not_epsilon[id] = std::make_pair(state->symbol, next);
     }
 
     for (auto &[u, pair]: not_epsilon) {
@@ -95,11 +113,15 @@ DFA::DFA(const std::string &postfix) : NFA(postfix) {
         int id = count;
         auto *now = new Node{
                 id,
+                false,
                 std::map<char, Node *>(),
                 former_id,
                 epsilon
         };
 
+        now->is_receive |= id_to_state[former_id]->is_receive;
+        for (auto i : epsilon)
+            now->is_receive |= id_to_state[i]->is_receive;
         id_to_node[id] = now;
         node_to_id[now] = id;
     }

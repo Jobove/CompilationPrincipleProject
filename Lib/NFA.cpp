@@ -20,22 +20,21 @@ bool is_operator(char ch) {
     return operators.find(ch) != operators.end();
 }
 
-State::State(int is_receive_, char symbol_) : is_receive(is_receive_), symbol(symbol_) {
+State::State(int is_receive_) : is_receive(is_receive_) {
     static int count = 0;
     id = ++count;
-    left = right = nullptr;
+    former_id = 0;
 }
 
-void State::set_next(State *nxt) {
-    if (left and right)
-        throw std::runtime_error("More than 2 outward edge.");
-    State *&now = (left ? right : left);
+void State::set_next(State *nxt, char ch) {
+    if (edges[ch] != nullptr)
+        throw std::runtime_error("set_next");
 
-    now = nxt;
+    edges[ch] = nxt;
 }
 
-void State::set_next(State &nxt) {
-    set_next(&nxt);
+void State::set_next(State &nxt, char ch) {
+    set_next(&nxt, ch);
 }
 
 Fragment::Fragment(State *in_, State *out_) : in(in_), out(out_) {}
@@ -55,47 +54,48 @@ void Fragment::destroy() const {
 
 void Fragment::destroy_walk(State *pos, std::set<State *> &bin, State *end) {
     bin.emplace(pos);
-    if (pos->left and bin.find(pos->left) == bin.end() and pos->left != end)
-        destroy_walk(pos->left, bin, end);
-    if (pos->right and bin.find(pos->right) == bin.end() and pos->right != end)
-        destroy_walk(pos->left, bin, end);
+    for (auto &[ch, p] : pos->edges) {
+        if (bin.find(p) != bin.end() or p == end)
+            continue;
+        destroy_walk(p, bin, end);
+    }
 }
 
 Fragment *NFA::any(Fragment *operand) {
-    auto *state1 = new State(false, 0),
-            *state2 = new State(true, 0);
+    auto *state1 = new State(false),
+            *state2 = new State(true);
 
-    state1->set_next(operand->in);
-    operand->out->set_next(operand->in);
-    operand->out->set_next(state2);
-    state1->set_next(state2);
+    state1->set_next(operand->in, 0);
+    operand->out->set_next(operand->in, 0);
+    operand->out->set_next(state2, 0);
+    state1->set_next(state2, 0);
 
     return new Fragment(state1, state2);
 }
 
 Fragment *NFA::alter(Fragment *operand1, Fragment *operand2) {
-    auto *state1 = new State(false, 0),
-            *state2 = new State(true, 0);
+    auto *state1 = new State(false),
+            *state2 = new State(true);
 
-    state1->set_next(operand1->in);
-    state1->set_next(operand2->in);
-    operand1->out->set_next(state2);
-    operand2->out->set_next(state2);
+    state1->set_next(operand1->in, 0);
+    state1->set_next(operand2->in, 0);
+    operand1->out->set_next(state2, 0);
+    operand2->out->set_next(state2, 0);
 
     return new Fragment(state1, state2);
 }
 
 Fragment *NFA::combine(Fragment *operand1, Fragment *operand2) {
-    auto *state1 = new State(false, 0),
-            *state2 = new State(false, 0),
-            *state3 = new State(false, 0),
-            *state4 = new State(true, 0);
+    auto *state1 = new State(false),
+            *state2 = new State(false),
+            *state3 = new State(false),
+            *state4 = new State(true);
 
-    state1->set_next(operand1->in);
-    operand1->out->set_next(state2);
-    state2->set_next(state3);
-    state3->set_next(operand2->in);
-    operand2->out->set_next(state4);
+    state1->set_next(operand1->in, 0);
+    operand1->out->set_next(state2, 0);
+    state2->set_next(state3, 0);
+    state3->set_next(operand2->in, 0);
+    operand2->out->set_next(state4, 0);
 
     return new Fragment(state1, state4);
 }
@@ -105,10 +105,10 @@ NFA::NFA(const std::string &postfix) {
 
     for (auto ch: postfix) {
         if (not is_operator(ch)) {
-            auto *begin = new State(false, ch),
-                    *end = new State(true, 0);
+            auto *begin = new State(false),
+                    *end = new State(true);
 
-            begin->set_next(end);
+            begin->set_next(end, ch);
             fragments.push(new Fragment(begin, end));
             continue;
         }
@@ -151,12 +151,12 @@ NFA::NFA(const std::string &postfix) {
             case '+': {
                 auto *operand = fragments.top();
                 fragments.pop();
-                auto *begin = new State(false, 0),
-                        *end = new State(true, 0);
+                auto *begin = new State(false),
+                        *end = new State(true);
 
-                begin->set_next(operand->in);
-                operand->out->set_next(end);
-                end->set_next(begin);
+                begin->set_next(operand->in, 0);
+                operand->out->set_next(end, 0);
+                end->set_next(begin, 0);
 
                 fragments.push(new Fragment(begin, end));
 
@@ -166,12 +166,12 @@ NFA::NFA(const std::string &postfix) {
             case '?': {
                 auto *operand = fragments.top();
                 fragments.pop();
-                auto *begin = new State(false, 0),
-                        *end = new State(true, 0);
+                auto *begin = new State(false),
+                        *end = new State(true);
 
-                begin->set_next(operand->in);
-                operand->out->set_next(end);
-                begin->set_next(end);
+                begin->set_next(operand->in, 0);
+                operand->out->set_next(end, 0);
+                begin->set_next(end, 0);
                 fragments.push(new Fragment(begin, end));
 
                 delete operand;
@@ -214,19 +214,13 @@ void NFA::refactor() {
         if (id + 1 > son.size())
             son.resize(id + 1);
 
-        if (pos->left) {
-            if (not visited[pos->left->id])
-                q.push(pos->left);
-            son[id].insert(pos->left);
-            debug[pos->left] = id;
-            visited[pos->left->id] = true;
-        }
-        if (pos->right) {
-            if (not visited[pos->right->id])
-                q.push(pos->right);
-            son[id].insert(pos->right);
-            debug[pos->right] = id;
-            visited[pos->right->id] = true;
+        for (auto &[ch, p] : pos->edges) {
+            if (not visited[p->id])
+                q.push(p);
+
+            son[id].insert(p);
+            debug[p] = id;
+            visited[p->id] = true;
         }
     }
 
@@ -235,11 +229,14 @@ void NFA::refactor() {
 
 void NFA::output() {
     std::cout << "<--------------------Outputting NFA Result-------------------->" << std::endl;
-    for (auto &[id, State]: id_to_state) {
-        std::cout << "id: " << id << ". Sons: ";
-        for (auto const &i: son[id]) {
-            std::cout << '(' << (i->symbol ? i->symbol : '#') << ", " << state_to_id[i] << ") ";
+    for (auto &[id, state]: id_to_state) {
+        std::cout << "id: " << id << " , former id: " << state->id << ". Sons: ";
+        for (auto const &[ch, p] : state->edges) {
+            std::cout << '(' << (ch ? ch : '#') << ", " << state_to_id[p] << ") ";
         }
+//        for (auto const &i: son[id]) {
+//            std::cout << '(' << (i->symbol ? i->symbol : '#') << ", " << state_to_id[i] << ") ";
+//        }
         std::cout << std::endl;
     }
     std::cout << "<---------------Finished Outputting NFA Result--------------->" << std::endl;

@@ -10,6 +10,8 @@
 struct Node {
     int id;
 
+    bool is_receive;
+
     std::map<char, Node *> edges;
 
     int former_id;

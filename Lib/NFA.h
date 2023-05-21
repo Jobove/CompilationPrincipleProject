@@ -15,19 +15,17 @@ using std::string;
 struct State {
     int id;
 
+    int former_id;
+
     bool is_receive;
 
-    State *left;
+    std::map<char, State *> edges;
 
-    State *right;
+    State(int is_receive_);
 
-    char symbol;
+    void set_next(State *nxt, char ch);
 
-    State(int is_receive_, char symbol_);
-
-    void set_next(State *nxt);
-
-    void set_next(State &nxt);
+    void set_next(State &nxt, char ch);
 };
 
 struct Fragment {

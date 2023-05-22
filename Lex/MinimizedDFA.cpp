@@ -11,7 +11,7 @@ MinimizedDFA::MinimizedDFA(const std::string &postfix) : DFA(postfix) {
 
     for (auto &[id, ptr]: id_to_node) {
         for (auto &[_id, _ptr]: id_to_node) {
-            if (ptr->edges != _ptr->edges)
+            if (ptr->edges != _ptr->edges or ptr->is_receive != _ptr->is_receive)
                 continue;
 
             disjointSet.merge(id, _id);
@@ -52,7 +52,7 @@ void MinimizedDFA::output() {
 
     std::cout << "<---------------Outputting Minimized DFA Result-------------->" << std::endl;
     for (auto &[id, p]: id_to_minimized_node) {
-        std::cout << "id: " << id << ". Sons: ";
+        std::cout << "id: " << (p->is_receive ? "(receive) " : "") << id << ". Sons: ";
         for (auto &[ch, v]: id_to_minimized_node[id]->edges) {
             std::cout << '(' << ch << ", " << minimized_node_to_id[v] << ") ";
         }

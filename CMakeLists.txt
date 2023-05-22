@@ -5,10 +5,10 @@ set(CMAKE_CXX_STANDARD 17)
 
 aux_source_directory(. DIR_SRCS)
 
-include_directories(./ ./Lib)
+include_directories(./ ./Lex)
 
-add_subdirectory(Lib)
+add_subdirectory(Lex)
 
 add_executable(CompilationPrinciple ${DIR_SRCS})
 
-target_link_libraries(CompilationPrinciple Lib)
+target_link_libraries(CompilationPrinciple Lex)

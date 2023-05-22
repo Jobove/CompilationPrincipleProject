@@ -21,6 +21,8 @@ struct State {
 
     std::map<char, State *> edges;
 
+    std::set<State *> epsilon_out;
+
     State(int is_receive_);
 
     void set_next(State *nxt, char ch);
@@ -60,6 +62,10 @@ protected:
     std::map<State const *, int> state_to_id;
 
     std::vector<std::set<State const *>> son;
+
+    std::set<char> char_set;
+
+    int size;
 public:
     explicit NFA(const std::string &postfix);
 

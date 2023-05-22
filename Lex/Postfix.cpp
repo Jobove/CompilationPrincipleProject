@@ -56,19 +56,6 @@ string Postfix::get_result() {
         process += '.';
     }
 
-//    for (char ch : expression) {
-//        if (priority.find(ch) != priority.end() and ch != '(') {
-//            process += ch;
-//            is_last_operand = true;
-//        } else {
-//            if (ch != ')' and not is_last_operand)
-//                process += '.';
-//
-//            process += ch;
-//            is_last_operand = (ch == '(');
-//        }
-//    }
-
     for (char ch : process) {
         if (priority.find(ch) != priority.end() and ch != '(') {
             char op;

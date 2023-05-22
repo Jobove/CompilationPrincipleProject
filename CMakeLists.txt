@@ -5,10 +5,11 @@ set(CMAKE_CXX_STANDARD 17)
 
 aux_source_directory(. DIR_SRCS)
 
-include_directories(./ ./Lex)
+include_directories(./ ./Lex ./Grammar)
 
 add_subdirectory(Lex)
+add_subdirectory(Grammar)
 
 add_executable(CompilationPrinciple ${DIR_SRCS})
 
-target_link_libraries(CompilationPrinciple Lex)
+target_link_libraries(CompilationPrinciple Lex Grammar)

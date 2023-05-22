@@ -10,7 +10,7 @@ map<char,int> Postfix::priority{
         {'+', 3},
         {'*', 3},
         {'?', 3},
-        {'.', 2},
+        {'&', 2},
         {'|', 1},
         {'(', 0}
 };
@@ -53,7 +53,7 @@ string Postfix::get_result() {
         if (not next)
             continue;
 
-        process += '.';
+        process += '&';
     }
 
     for (char ch : process) {

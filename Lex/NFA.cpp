@@ -10,7 +10,7 @@
 
 bool is_operator(char ch) {
     static std::set<char> const operators{
-            '.',
+            '&',
             '|',
             '?',
             '*',
@@ -157,7 +157,7 @@ NFA::NFA(const std::string &postfix) {
                 //delete operand2;
                 break;
             }
-            case '.': {
+            case '&': {
                 Fragment *operand1, *operand2;
                 operand2 = fragments.top();
                 fragments.pop();

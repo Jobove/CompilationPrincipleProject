@@ -7,33 +7,6 @@
 #include <iostream>
 #include <queue>
 
-//void DFA::dfs(std::map<int, std::set<int>> &reach_epsilon, std::map<int, bool> &visited, int root, int id) {
-//    visited[id] = true;
-//
-//    auto p = id_to_state[id];
-//
-//    std::cout << p->symbol << std::endl;
-//
-//    if (p->symbol)
-//        return;
-//
-//    if (p->left) {
-//        int const left = state_to_id[p->left];
-//
-//        reach_epsilon[id].insert(left);
-//        if (not visited[left])
-//            dfs(reach_epsilon, visited, root, left);
-//    }
-//
-//    if (p->right) {
-//        int const right = state_to_id[p->right];
-//
-//        reach_epsilon[id].insert(right);
-//        if (not visited[right])
-//            dfs(reach_epsilon, visited, root, right);
-//    }
-//}
-
 DFA::DFA(const std::string &postfix) : NFA(postfix) {
     std::map<int, std::set<int>> reach_epsilon;
     std::map<int, std::pair<char, int>> not_epsilon;
@@ -103,22 +76,6 @@ DFA::DFA(const std::string &postfix) : NFA(postfix) {
             }
             if (to.empty())
                 continue;
-//            std::set<int> set;
-//            while (true) {
-//                bool bo = false;
-//
-//                for (auto in : to) {
-//                    if (id_to_state[in]->edges.find(ch) == id_to_state[in]->edges.end() or set.find(in) != set.end())
-//                        continue;
-//
-//                    set.insert(in);
-//                    to.merge(reach_epsilon[id_to_state[in]->edges[ch]->id]);
-//                    bo = true;
-//                }
-//
-//                if (not bo)
-//                    break;
-//            }
 
             if (set_to_id.find(to) == set_to_id.end()) {
                 int id = ++count;
@@ -141,30 +98,6 @@ DFA::DFA(const std::string &postfix) : NFA(postfix) {
 
             p->edges[ch] = id_to_node[set_to_id[to]];
         }
-
-        /*
-        for (auto &[former_id, pair] : not_epsilon) {
-            if (p->epsilon.find(former_id) == p->epsilon.end())
-                continue;
-
-            std::set<int> to = reach_epsilon[pair.second];
-
-            if (set_to_id.find(to) == set_to_id.end()) {
-                auto *now = new Node{
-                        ++count,
-                        false,
-                        std::map<char, Node *>(),
-                        0,
-                        to
-                };
-                q.push(now);
-                id_to_node[now->id] = now;
-                node_to_id[now] = now->id;
-                set_to_id[to] = now->id;
-            }
-            p->edges[pair.first] = id_to_node[set_to_id[to]];
-        }
-         */
     }
 }
 

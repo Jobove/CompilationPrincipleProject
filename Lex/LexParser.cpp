@@ -3,36 +3,38 @@
 //
 
 #include "LexParser.h"
-#include <regex>
 #include <fstream>
 #include <iostream>
-
-std::string const LexParser::normal = R"([^\\]+)";
-
-std::string const LexParser::node = R"(\\([a-zA-Z]+) = (.+))";
+#include <map>
 
 LexParser::LexParser(std::string path) : filename(std::move(path)) {
-    std::ifstream ifs;
-    ifs.open(filename, std::ios::in);
+    std::ifstream ifs(filename);
+    config = json::parse(ifs);
 
-    while (not ifs.eof()) {
-        content += char (ifs.get());
-    }
-
-    std::stringstream stringstream((std::string(content)));
-    while (not stringstream.eof()) {
-        std::string line;
-        while (not stringstream.eof() and stringstream.peek() != '\r') {
-            line += char (stringstream.get());
-        }
-
-        std::cout << line << std::endl;
-        std::regex node_regex(node), normal_regex(normal);
-        if (std::regex_match(line, node_regex)) {
-
-        }
-    }
-
-    std::cout << content;
+    keywords = config["keywords"].get<std::set<std::string>>();
+    operators = config["operators"].get<std::set<std::string>>();
+    for (auto const &i: config["delimiters"].get<std::vector<std::vector<std::string>>>())
+        delimiters.insert(std::make_pair(i[0][0], i[1][0]));
+    comment = config["comment"].get<std::set<std::string>>();
+    tokens = config["tokens"].get<std::map<std::string, std::string>>();
 }
 
+const std::set<std::string> &LexParser::get_keywords() const {
+    return keywords;
+}
+
+const std::set<std::string> &LexParser::get_operators() const {
+    return operators;
+}
+
+const std::set<std::pair<char, char>> &LexParser::get_delimiters() const {
+    return delimiters;
+}
+
+const std::set<std::string> &LexParser::get_comment() const {
+    return comment;
+}
+
+const std::map<std::string, std::string> &LexParser::get_tokens() const {
+    return tokens;
+}

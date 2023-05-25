@@ -1,28 +1,28 @@
+#include <array>
 #include <iostream>
+#include <vector>
+#include "BNF.h"
+#include "Postfix.h"
 #include "utils.h"
 #include "nlohmann/json.hpp"
+#include "MinimizedDFA.h"
+#include "LexParser.h"
 
 using std::cout;
 using std::endl;
 using json = nlohmann::json;
 
 int main() {
-//    std::string content = read(R"(C:\Coding\Projects\CLionProjects\CompilationPrincipleProject\Config\grammar)");
-    json j = {
-            {"pi",      3.141},
-            {"happy",   true},
-            {"name",    "Niels"},
-            {"nothing", nullptr},
-            {"answer",  {
-                                {"everything", 42}
-                        }
-            },
-            {"list",    {1, 0, 2}},
-            {"object",  {
-                                {"currency",   "USD"},
-                                   {"value", 42.99}
-                        }
-            }
-    };
-    cout << j["list"][1] << endl;
+    std::filesystem::path lex(R"(D:\Coding\Projects\CLionProjects\CompilationPrincipleProject\Config\lex.json)");
+    LexParser lexParser(lex.string());
+    map<string, MinimizedDFA> m;
+    std::vector<string> strings;
+
+    strings.insert(strings.end(), lexParser.get_keywords().begin(), lexParser.get_keywords().end());
+    strings.insert(strings.end(), lexParser.get_operators().begin(), lexParser.get_operators().end());
+
+    for (auto const &str: strings)
+        Postfix(str).get_result();
+
+    return 0;
 }

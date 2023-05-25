@@ -6,7 +6,6 @@
 #include <set>
 #include <string>
 #include <vector>
-#include <wchar.h>
 
 BNF::BNF(map<string, std::vector<std::vector<string>>> expressions, string start_letter) : expressions(
         std::move(expressions)), starter(std::move(start_letter)), root(nullptr) {

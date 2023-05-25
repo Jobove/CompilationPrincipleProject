@@ -16,10 +16,10 @@ using std::set;
 using std::string;
 using std::map;
 
-struct Node {
+struct TreeNode {
     MyTuple data;
 
-    std::vector<Node *> child;
+    std::vector<TreeNode *> child;
 };
 
 class BNF {
@@ -42,7 +42,7 @@ private:
 
     static string const empty;
 
-    Node *root;
+    TreeNode *root;
 
 public:
     BNF(map<string, std::vector<std::vector<string>>> expressions, string start_letter);

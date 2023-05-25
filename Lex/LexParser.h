@@ -19,23 +19,24 @@ private:
 
     std::set<std::string> keywords;
 public:
-    const std::set<std::string> &get_keywords() const;
+    [[nodiscard]] const std::set<std::string> &get_keywords() const;
 
-    const std::set<std::string> &get_operators() const;
+    [[nodiscard]] const std::set<std::pair<std::string, std::string>> &get_operators() const;
 
-    const std::set<std::pair<char, char>> &get_delimiters() const;
+    [[nodiscard]] const std::set<std::pair<std::pair<std::string, std::string>, std::pair<std::string, std::string>>> &
+    get_brackets() const;
 
-    const std::set<std::string> &get_comment() const;
+    [[nodiscard]] const std::set<std::string> &get_comments() const;
 
-    const std::map<std::string, std::string> &get_tokens() const;
+    [[nodiscard]] const std::map<std::string, std::string> &get_tokens() const;
 
 private:
 
-    std::set<std::string> operators;
+    std::set<std::pair<std::string, std::string>> operators;
 
-    std::set<std::pair<char, char>> delimiters;
+    std::set<std::pair<std::pair<std::string, std::string>, std::pair<std::string, std::string>>> brackets;
 
-    std::set<std::string> comment;
+    std::set<std::string> comments;
 
     std::map<std::string, std::string> tokens;
 

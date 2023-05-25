@@ -1,0 +1,17 @@
+// function add
+int
+add ID
+(
+int
+a ID
+,
+int
+b ID
+)
+{
+return
+a ID
++
+b ID
+;
+}

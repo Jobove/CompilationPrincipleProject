@@ -216,7 +216,7 @@ NFA::NFA(const std::string &postfix) {
 }
 
 NFA::~NFA() {
-    nfa->destroy();
+//    nfa->destroy();
     //delete nfa->in;
     //delete nfa->out;
 }

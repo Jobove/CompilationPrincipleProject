@@ -78,3 +78,37 @@ bool MinimizedDFA::match(const string &str) {
 
     return result and p and p->is_receive;
 }
+
+std::map<int, std::map<char, int>> MinimizedDFA::get_adjacent_list() {
+    std::map<int, std::map<char, int>> result;
+
+    for (auto &[id, p]: id_to_minimized_node) {
+        for (auto &[ch, v]: p->edges) {
+            result[id][ch] = minimized_node_to_id[v];
+        }
+    }
+
+    return result;
+}
+
+std::map<int, Node *> const &MinimizedDFA::get_id_to_minimized_node() const {
+    return id_to_minimized_node;
+}
+
+int MinimizedDFA::count_end() const {
+    int res = 0;
+
+    for (auto &[id, state]: id_to_minimized_node)
+        res += state->is_receive;
+
+    return res;
+}
+
+std::set<int> MinimizedDFA::get_end() const {
+    std::set<int> res;
+    for (auto &[id, state]: id_to_minimized_node)
+        if (state->is_receive)
+            res.insert(id);
+
+    return res;
+}

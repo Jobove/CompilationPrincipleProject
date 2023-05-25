@@ -45,5 +45,7 @@ public:
     explicit LexParser(std::string path);
 };
 
+std::string get_lexer(const std::filesystem::path &config_path);
+
 
 #endif //COMPILATIONPRINCIPLE_LEXPARSER_H

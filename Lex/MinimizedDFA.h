@@ -8,7 +8,7 @@
 #include "DFA.h"
 #include <set>
 
-class MinimizedDFA : DFA {
+class MinimizedDFA : public DFA {
 private:
     Node *minimized_node;
 
@@ -23,9 +23,13 @@ public:
 
     bool match(const string &str);
 
-    std::map<int, std::map<char, int>> get_adjacent_list();
+    std::map<int, std::map<char, string>> get_adjacent_list() override;
 
-    [[nodiscard]] std::map<int, Node *> const &get_id_to_minimized_node() const;
+    std::map<int, std::map<char, string>> get_dfa_list();
+
+    std::map<int, std::map<char, string>> get_nfa_list();
+
+    std::map<int, std::map<char, int>> get_list();
 
     [[nodiscard]] int count_end() const;
 

@@ -79,7 +79,19 @@ bool MinimizedDFA::match(const string &str) {
     return result and p and p->is_receive;
 }
 
-std::map<int, std::map<char, int>> MinimizedDFA::get_adjacent_list() {
+std::map<int, std::map<char, string>> MinimizedDFA::get_adjacent_list() {
+    std::map<int, std::map<char, string>> result;
+
+    for (auto &[id, p]: id_to_minimized_node) {
+        for (auto &[ch, v]: p->edges) {
+            result[id][ch] = std::to_string(minimized_node_to_id[v]);
+        }
+    }
+
+    return result;
+}
+
+std::map<int, std::map<char, int>> MinimizedDFA::get_list() {
     std::map<int, std::map<char, int>> result;
 
     for (auto &[id, p]: id_to_minimized_node) {
@@ -89,10 +101,6 @@ std::map<int, std::map<char, int>> MinimizedDFA::get_adjacent_list() {
     }
 
     return result;
-}
-
-std::map<int, Node *> const &MinimizedDFA::get_id_to_minimized_node() const {
-    return id_to_minimized_node;
 }
 
 int MinimizedDFA::count_end() const {
@@ -111,4 +119,12 @@ std::set<int> MinimizedDFA::get_end() const {
             res.insert(id);
 
     return res;
+}
+
+std::map<int, std::map<char, string>> MinimizedDFA::get_dfa_list() {
+    return DFA::get_adjacent_list();
+}
+
+std::map<int, std::map<char, string>> MinimizedDFA::get_nfa_list() {
+    return NFA::get_adjacent_list();
 }

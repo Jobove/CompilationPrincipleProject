@@ -70,7 +70,7 @@ char try_match(FILE *output, const char *content, int *p) {
         while (content[*p] != '\n' && content[*p] != '\0')
             ++*p;
         r = *p;
-        output_comment(output, content, l, r);
+//        output_comment(output, content, l, r);
         return 1;
     }
     // try keywords.

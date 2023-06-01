@@ -19,12 +19,11 @@ using std::map;
 struct TreeNode {
     MyTuple data;
 
-    std::vector<TreeNode *> child;
+    std::vector<TreeNode> child;
 };
 
 class BNF {
 private:
-    std::map<string, std::vector<std::vector<string>>> expressions;
 
     set<string> visited;
 
@@ -42,9 +41,19 @@ private:
 
     static string const empty;
 
-    TreeNode *root;
+    TreeNode root;
+
+    void extract_left_common_factor(string const &suffix);
+
+    std::map<string, std::vector<std::vector<string>>> expressions;
+
+    void judge(string const &str);
 
 public:
+    [[nodiscard]] set<string> get_terminal() const;
+
+    [[nodiscard]] set<string> get_non_terminal() const;
+
     BNF(map<string, std::vector<std::vector<string>>> expressions, string start_letter);
 
     ~BNF();
@@ -57,8 +66,6 @@ public:
 
     void remove_indirect_left_recursion();
 
-    void judge(string const &str);
-
     void replace(string const &left, int index, string const &str, std::vector<string> const &item);
 
     void process_first();
@@ -67,19 +74,31 @@ public:
 
     set<string> get_first(std::vector<string> const &item);
 
-    void get_follow();
+    [[nodiscard]] std::map<string, set<string>> get_first() const;
+
+    [[nodiscard]] std::map<string, set<string>> get_follow() const;
+
+    [[nodiscard]] std::map<std::string, std::map<std::string, std::set<std::vector<string>>>> get_LL1() const;
+
+    void process_follow();
 
     static bool map_compare(map<string, set<string>> const &a, map<string, set<string>> const &b);
 
-    void get_terminal();
+    void process_terminal();
 
-    void get_LL1();
+    void process_LL1();
 
-    void extract_left_common_factor();
+    void extract_left_common_factor_recursive();
 
-    void get_longest_string(std::vector<std::vector<string>> &right, std::vector<string> &longest_string);
+    void get_longest_string(std::vector<std::vector<string>> const &right, std::vector<string> &ans);
 
     void substitution();
+
+    void generate_syntax_tree(std::vector<MyTuple> &statement);
+
+    [[nodiscard]] map<string, std::vector<std::vector<string>>> get_expressions() const;
+
+    [[nodiscard]] TreeNode const &get_root() const;
 };
 
 

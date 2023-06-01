@@ -1,11 +1,19 @@
+#include <fstream>
 #include <iostream>
-#include "LexParser.h"
+#include <QApplication>
+#include <QProcess>
 
+#include "LexParser.h"
+#include "widget.h"
+
+using std::string;
 using std::cout;
 using std::endl;
 
-int main() {
-    cout << get_lexer(R"(C:\Coding\Projects\CLionProjects\CompilationPrincipleProject\Config\lex.json)") << endl;
+int main(int argc, char *argv[]) {
+    QApplication application(argc, argv);
+    Widget w;
+    w.show();
 
-    return 0;
+    return QApplication::exec();
 }

@@ -3,11 +3,9 @@
 //
 
 #include "LexParser.h"
-#include "MinimizedDFA.h"
 #include "Postfix.h"
 #include "boost/format.hpp"
 #include <fstream>
-#include <iostream>
 #include <map>
 #include <vector>
 
@@ -172,8 +170,8 @@ std::string const template_inner = R"(
                             case '\v': {
                                 if (check_end(end, end_len, state)) {
                                     int r = pos - 1;
-                                    char *tmp = (char *) malloc(sizeof(char) * (r - l + 1 + sizeof(token)) + 1);
-                                    memset(tmp, 0, sizeof(char) * (r - l + 1 + sizeof(token)) + 1);
+                                    char *tmp = (char *) malloc(sizeof(char) * (r - l + 1 + strlen(token)) + 1);
+                                    memset(tmp, 0, sizeof(char) * (r - l + 1 + strlen(token)) + 1);
                                     memmove(tmp, content + l, sizeof(char) * (r - l + 1));
                                     strcat(tmp, " ");
                                     strcat(tmp, token);
@@ -207,7 +205,7 @@ std::string const template_inner = R"(
 )";
 
 std::string fill_token(const string &token, MinimizedDFA &dfa, int count) {
-    adjacent_list_t adjacent_list = std::move(dfa.get_adjacent_list());
+    adjacent_list_t adjacent_list = std::move(dfa.get_list());
     size_t total_state = adjacent_list.size(), total_char = 0, total_end = dfa.count_end();
     boost::format fmt(template_inner);
 
@@ -269,7 +267,7 @@ void fill_regex(std::vector<std::pair<std::string, MinimizedDFA>> &arr, boost::f
     fmt % total_dfa % tmp;
 }
 
-std::string get_lexer(const std::filesystem::path &config_path) {
+std::vector<MinimizedDFA> get_lexer(const std::filesystem::path &config_path, std::string &lexer) {
     std::filesystem::path lex(config_path);
     LexParser lex_parser(lex.string());
     std::string sample = std::move(
@@ -282,11 +280,14 @@ std::string get_lexer(const std::filesystem::path &config_path) {
     fill_comments(lex_parser, fmt);
 
     std::vector<std::pair<std::string, MinimizedDFA>> arr;
+    std::vector<MinimizedDFA> result;
     for (auto const &[name, regex]: lex_parser.get_tokens()) {
         arr.emplace_back(name, Postfix(regex).get_result());
+        result.emplace_back(arr.back().second);
     }
 
     fill_regex(arr, fmt);
 
-    return fmt.str();
+    lexer = fmt.str();
+    return result;
 }

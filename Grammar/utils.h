@@ -14,12 +14,16 @@ struct MyTuple {
     std::string num;
 };
 
-void trim(std::string &);
+namespace Utils {
+    std::string const start = "program";
+}
+
+std::string trim(const std::string &string);
 
 std::vector<std::string> split(std::string const &, std::string const &);
 
-std::map<std::string, std::vector<std::string>> parse(const std::string &string);
+std::map<std::string, std::vector<std::vector<std::string>>> parse(const std::string &string);
 
-std::string read(const std::filesystem::path& path);
+std::vector<MyTuple> get_tuples(const std::string &string);
 
 #endif //COMPILATIONPRINCIPLE_UTILS_H

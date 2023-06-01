@@ -1,0 +1,19 @@
+{
+  "name": "compilationprinciple",
+  "version-string": "1.0.0",
+  "builtin-baseline": "c6592ce60ff394049905365865f59e3a4d93d35b",
+  "dependencies": [
+    {
+      "name": "boost",
+      "version>=": "1.82.0#1"
+    },
+    {
+      "name": "boost-any",
+      "version>=": "1.82.0#1"
+    },
+    {
+      "name": "boost-regex",
+      "version>=": "1.82.0#1"
+    }
+  ]
+}

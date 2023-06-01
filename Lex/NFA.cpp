@@ -6,6 +6,7 @@
 #include <queue>
 #include <iostream>
 #include <functional>
+#include <string>
 #include "NFA.h"
 
 bool is_operator(char ch) {
@@ -58,12 +59,12 @@ void Fragment::destroy() const {
 
 void Fragment::destroy_walk(State *pos, std::set<State *> &bin, State *end) {
     bin.emplace(pos);
-    for (auto &[ch, p] : pos->edges) {
+    for (auto &[ch, p]: pos->edges) {
         if (bin.find(p) != bin.end() or p == end)
             continue;
         destroy_walk(p, bin, end);
     }
-    for (auto p : pos->epsilon_out) {
+    for (auto p: pos->epsilon_out) {
         if (bin.find(p) != bin.end() or p == end)
             continue;
         destroy_walk(p, bin, end);
@@ -242,7 +243,7 @@ void NFA::refactor() {
         if (id + 1 > son.size())
             son.resize(id + 1);
 
-        for (auto &[ch, p] : pos->edges) {
+        for (auto &[ch, p]: pos->edges) {
             if (not visited[p->id])
                 q.push(p);
 
@@ -251,7 +252,7 @@ void NFA::refactor() {
             debug[p] = id;
             visited[p->id] = true;
         }
-        for (auto p : pos->epsilon_out) {
+        for (auto p: pos->epsilon_out) {
             if (not visited[p->id])
                 q.push(p);
 
@@ -261,7 +262,7 @@ void NFA::refactor() {
         }
     }
 
-    for (auto &[id, state] : id_to_state) {
+    for (auto &[id, state]: id_to_state) {
         state->former_id = state->id;
         state->id = id;
     }
@@ -274,10 +275,10 @@ void NFA::output() {
     std::cout << "<--------------------Outputting NFA Result-------------------->" << std::endl;
     for (auto &[id, state]: id_to_state) {
         std::cout << "id: " << id << " , former id: " << state->id << ". Sons: ";
-        for (auto const &[ch, p] : state->edges) {
+        for (auto const &[ch, p]: state->edges) {
             std::cout << '(' << ch << ", " << state_to_id[p] << ", " << p->id << ") ";
         }
-        for (auto const p : state->epsilon_out) {
+        for (auto const p: state->epsilon_out) {
             std::cout << '(' << "#" << ", " << state_to_id[p] << ", " << p->id << ") ";
         }
 //        for (auto const &i: son[id]) {
@@ -286,4 +287,19 @@ void NFA::output() {
         std::cout << std::endl;
     }
     std::cout << "<---------------Finished Outputting NFA Result--------------->" << std::endl;
+}
+
+std::map<int, std::map<char, string>> NFA::get_adjacent_list() {
+    std::map<int, std::map<char, string>> result;
+
+    for (auto &[id, p]: id_to_state) {
+        for (auto &[ch, v]: p->edges) {
+            result[id][ch] = (result[id][ch].empty() ? "" : result[id][ch] + ", ") + std::to_string(state_to_id[v]);
+        }
+        for (auto &v: p->epsilon_out) {
+            result[id]['#'] = (result[id]['#'].empty() ? "" : result[id]['#'] + ", ") + std::to_string(state_to_id[v]);
+        }
+    }
+
+    return result;
 }

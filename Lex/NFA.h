@@ -72,6 +72,8 @@ public:
     ~NFA();
 
     virtual void output();
+
+    virtual std::map<int, std::map<char, string>> get_adjacent_list();
 };
 
 #endif //COMPILATIONPRINCIPLE_NFA_H

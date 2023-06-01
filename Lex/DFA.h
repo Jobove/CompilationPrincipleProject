@@ -19,7 +19,7 @@ struct Node {
     std::set<int> epsilon;
 };
 
-class DFA : NFA {
+class DFA : public NFA {
 protected:
     Node *node = nullptr;
 
@@ -32,6 +32,8 @@ public:
     explicit DFA(const std::string &postfix);
 
     void output() override;
+
+    std::map<int, std::map<char, string>> get_adjacent_list() override;
 };
 
 

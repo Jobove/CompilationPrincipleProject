@@ -114,3 +114,15 @@ void DFA::output() {
     }
     std::cout << "<---------------Finished Outputting DFA Result--------------->" << std::endl;
 }
+
+std::map<int, std::map<char, string>> DFA::get_adjacent_list() {
+    std::map<int, std::map<char, string>> result;
+
+    for (auto &[id, p]: id_to_node) {
+        for (auto &[ch, v]: p->edges) {
+            result[id][ch] = std::to_string(node_to_id[v]);
+        }
+    }
+
+    return result;
+}

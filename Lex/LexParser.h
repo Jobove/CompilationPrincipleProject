@@ -6,6 +6,7 @@
 #define COMPILATIONPRINCIPLE_LEXPARSER_H
 
 #include "nlohmann/json.hpp"
+#include "MinimizedDFA.h"
 #include <string>
 #include <set>
 #include <utility>
@@ -45,7 +46,7 @@ public:
     explicit LexParser(std::string path);
 };
 
-std::string get_lexer(const std::filesystem::path &config_path);
+std::vector<MinimizedDFA> get_lexer(const std::filesystem::path &config_path, std::string &lexer);
 
 
 #endif //COMPILATIONPRINCIPLE_LEXPARSER_H

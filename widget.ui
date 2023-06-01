@@ -1,0 +1,1139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+    <class>Widget</class>
+    <widget class="QWidget" name="Widget">
+        <property name="geometry">
+            <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>755</width>
+                <height>560</height>
+            </rect>
+        </property>
+        <property name="windowTitle">
+            <string>Widget</string>
+        </property>
+        <layout class="QGridLayout" name="gridLayout">
+            <item row="0" column="1">
+                <widget class="QTabWidget" name="Tabs">
+                    <property name="currentIndex">
+                        <number>1</number>
+                    </property>
+                    <widget class="QWidget" name="LexicalTab">
+                        <attribute name="title">
+                            <string>词法分析</string>
+                        </attribute>
+                        <layout class="QGridLayout" name="gridLayout_3">
+                            <item row="2" column="1">
+                                <spacer name="verticalSpacer">
+                                    <property name="orientation">
+                                        <enum>Qt::Vertical</enum>
+                                    </property>
+                                    <property name="sizeType">
+                                        <enum>QSizePolicy::Fixed</enum>
+                                    </property>
+                                    <property name="sizeHint" stdset="0">
+                                        <size>
+                                            <width>13</width>
+                                            <height>1</height>
+                                        </size>
+                                    </property>
+                                </spacer>
+                            </item>
+                            <item row="1" column="1">
+                                <layout class="QHBoxLayout" name="horizontalLayout">
+                                    <item>
+                                        <layout class="QVBoxLayout" name="verticalLayout_5">
+                                            <item>
+                                                <layout class="QHBoxLayout" name="horizontalLayout_2">
+                                                    <item>
+                                                        <widget class="QLineEdit" name="lex_config_input">
+                                                            <property name="text">
+                                                                <string extracomment=" "/>
+                                                            </property>
+                                                            <property name="placeholderText">
+                                                                <string>词法配置文件</string>
+                                                            </property>
+                                                        </widget>
+                                                    </item>
+                                                    <item>
+                                                        <widget class="QPushButton" name="select_lex_config_button">
+                                                            <property name="text">
+                                                                <string>浏览…</string>
+                                                            </property>
+                                                        </widget>
+                                                    </item>
+                                                </layout>
+                                            </item>
+                                            <item>
+                                                <widget class="QPushButton" name="generate_lexer_button">
+                                                    <property name="text">
+                                                        <string>生成词法分析程序</string>
+                                                    </property>
+                                                </widget>
+                                            </item>
+                                            <item>
+                                                <widget class="QLabel" name="label">
+                                                    <property name="text">
+                                                        <string>词法分析程序</string>
+                                                    </property>
+                                                </widget>
+                                            </item>
+                                            <item>
+                                                <widget class="QPlainTextEdit" name="lexer_output">
+                                                    <property name="readOnly">
+                                                        <bool>true</bool>
+                                                    </property>
+                                                    <property name="overwriteMode">
+                                                        <bool>false</bool>
+                                                    </property>
+                                                </widget>
+                                            </item>
+                                        </layout>
+                                    </item>
+                                    <item>
+                                        <spacer name="horizontalSpacer">
+                                            <property name="orientation">
+                                                <enum>Qt::Horizontal</enum>
+                                            </property>
+                                            <property name="sizeType">
+                                                <enum>QSizePolicy::Fixed</enum>
+                                            </property>
+                                            <property name="sizeHint" stdset="0">
+                                                <size>
+                                                    <width>2</width>
+                                                    <height>20</height>
+                                                </size>
+                                            </property>
+                                        </spacer>
+                                    </item>
+                                    <item>
+                                        <widget class="QTabWidget" name="tabs">
+                                            <property name="currentIndex">
+                                                <number>3</number>
+                                            </property>
+                                            <property name="tabsClosable">
+                                                <bool>false</bool>
+                                            </property>
+                                            <property name="tabBarAutoHide">
+                                                <bool>false</bool>
+                                            </property>
+                                            <widget class="QWidget" name="dfa_tab">
+                                                <attribute name="title">
+                                                    <string>NFA</string>
+                                                </attribute>
+                                                <layout class="QGridLayout" name="gridLayout_5">
+                                                    <item row="0" column="1">
+                                                        <spacer name="verticalSpacer_4">
+                                                            <property name="orientation">
+                                                                <enum>Qt::Vertical</enum>
+                                                            </property>
+                                                            <property name="sizeType">
+                                                                <enum>QSizePolicy::Fixed</enum>
+                                                            </property>
+                                                            <property name="sizeHint" stdset="0">
+                                                                <size>
+                                                                    <width>1</width>
+                                                                    <height>1</height>
+                                                                </size>
+                                                            </property>
+                                                        </spacer>
+                                                    </item>
+                                                    <item row="1" column="0">
+                                                        <spacer name="horizontalSpacer_4">
+                                                            <property name="orientation">
+                                                                <enum>Qt::Horizontal</enum>
+                                                            </property>
+                                                            <property name="sizeType">
+                                                                <enum>QSizePolicy::Fixed</enum>
+                                                            </property>
+                                                            <property name="sizeHint" stdset="0">
+                                                                <size>
+                                                                    <width>1</width>
+                                                                    <height>1</height>
+                                                                </size>
+                                                            </property>
+                                                        </spacer>
+                                                    </item>
+                                                    <item row="1" column="1" rowspan="2" colspan="2">
+                                                        <layout class="QGridLayout" name="gridLayout_4">
+                                                            <item row="0" column="0">
+                                                                <widget class="QToolBox" name="nfa_box">
+                                                                    <property name="toolTipDuration">
+                                                                        <number>-2</number>
+                                                                    </property>
+                                                                    <property name="currentIndex">
+                                                                        <number>0</number>
+                                                                    </property>
+                                                                    <widget class="QWidget" name="page_0">
+                                                                        <property name="geometry">
+                                                                            <rect>
+                                                                                <x>0</x>
+                                                                                <y>0</y>
+                                                                                <width>300</width>
+                                                                                <height>382</height>
+                                                                            </rect>
+                                                                        </property>
+                                                                        <attribute name="label">
+                                                                            <string/>
+                                                                        </attribute>
+                                                                        <widget class="QListWidget" name="nfa_table">
+                                                                            <property name="geometry">
+                                                                                <rect>
+                                                                                    <x>20</x>
+                                                                                    <y>110</y>
+                                                                                    <width>256</width>
+                                                                                    <height>192</height>
+                                                                                </rect>
+                                                                            </property>
+                                                                        </widget>
+                                                                    </widget>
+                                                                </widget>
+                                                            </item>
+                                                        </layout>
+                                                    </item>
+                                                    <item row="2" column="3">
+                                                        <spacer name="horizontalSpacer_5">
+                                                            <property name="orientation">
+                                                                <enum>Qt::Horizontal</enum>
+                                                            </property>
+                                                            <property name="sizeType">
+                                                                <enum>QSizePolicy::Fixed</enum>
+                                                            </property>
+                                                            <property name="sizeHint" stdset="0">
+                                                                <size>
+                                                                    <width>1</width>
+                                                                    <height>1</height>
+                                                                </size>
+                                                            </property>
+                                                        </spacer>
+                                                    </item>
+                                                    <item row="3" column="2">
+                                                        <spacer name="verticalSpacer_3">
+                                                            <property name="orientation">
+                                                                <enum>Qt::Vertical</enum>
+                                                            </property>
+                                                            <property name="sizeType">
+                                                                <enum>QSizePolicy::Fixed</enum>
+                                                            </property>
+                                                            <property name="sizeHint" stdset="0">
+                                                                <size>
+                                                                    <width>1</width>
+                                                                    <height>1</height>
+                                                                </size>
+                                                            </property>
+                                                        </spacer>
+                                                    </item>
+                                                </layout>
+                                            </widget>
+                                            <widget class="QWidget" name="minimized_dfa_tab">
+                                                <attribute name="title">
+                                                    <string>DFA</string>
+                                                </attribute>
+                                                <layout class="QGridLayout" name="gridLayout_9">
+                                                    <item row="0" column="1">
+                                                        <spacer name="verticalSpacer_5">
+                                                            <property name="orientation">
+                                                                <enum>Qt::Vertical</enum>
+                                                            </property>
+                                                            <property name="sizeType">
+                                                                <enum>QSizePolicy::Fixed</enum>
+                                                            </property>
+                                                            <property name="sizeHint" stdset="0">
+                                                                <size>
+                                                                    <width>1</width>
+                                                                    <height>1</height>
+                                                                </size>
+                                                            </property>
+                                                        </spacer>
+                                                    </item>
+                                                    <item row="1" column="0">
+                                                        <spacer name="horizontalSpacer_7">
+                                                            <property name="orientation">
+                                                                <enum>Qt::Horizontal</enum>
+                                                            </property>
+                                                            <property name="sizeType">
+                                                                <enum>QSizePolicy::Fixed</enum>
+                                                            </property>
+                                                            <property name="sizeHint" stdset="0">
+                                                                <size>
+                                                                    <width>1</width>
+                                                                    <height>1</height>
+                                                                </size>
+                                                            </property>
+                                                        </spacer>
+                                                    </item>
+                                                    <item row="1" column="3">
+                                                        <spacer name="horizontalSpacer_6">
+                                                            <property name="orientation">
+                                                                <enum>Qt::Horizontal</enum>
+                                                            </property>
+                                                            <property name="sizeType">
+                                                                <enum>QSizePolicy::Fixed</enum>
+                                                            </property>
+                                                            <property name="sizeHint" stdset="0">
+                                                                <size>
+                                                                    <width>1</width>
+                                                                    <height>1</height>
+                                                                </size>
+                                                            </property>
+                                                        </spacer>
+                                                    </item>
+                                                    <item row="2" column="2">
+                                                        <spacer name="verticalSpacer_6">
+                                                            <property name="orientation">
+                                                                <enum>Qt::Vertical</enum>
+                                                            </property>
+                                                            <property name="sizeType">
+                                                                <enum>QSizePolicy::Fixed</enum>
+                                                            </property>
+                                                            <property name="sizeHint" stdset="0">
+                                                                <size>
+                                                                    <width>1</width>
+                                                                    <height>1</height>
+                                                                </size>
+                                                            </property>
+                                                        </spacer>
+                                                    </item>
+                                                    <item row="1" column="1" colspan="2">
+                                                        <widget class="QToolBox" name="dfa_box">
+                                                            <property name="toolTipDuration">
+                                                                <number>-2</number>
+                                                            </property>
+                                                            <property name="currentIndex">
+                                                                <number>0</number>
+                                                            </property>
+                                                            <widget class="QWidget" name="page_9">
+                                                                <property name="geometry">
+                                                                    <rect>
+                                                                        <x>0</x>
+                                                                        <y>0</y>
+                                                                        <width>302</width>
+                                                                        <height>384</height>
+                                                                    </rect>
+                                                                </property>
+                                                                <attribute name="label">
+                                                                    <string/>
+                                                                </attribute>
+                                                                <widget class="QListWidget" name="nfa_table_7">
+                                                                    <property name="geometry">
+                                                                        <rect>
+                                                                            <x>20</x>
+                                                                            <y>30</y>
+                                                                            <width>256</width>
+                                                                            <height>192</height>
+                                                                        </rect>
+                                                                    </property>
+                                                                </widget>
+                                                            </widget>
+                                                        </widget>
+                                                    </item>
+                                                </layout>
+                                            </widget>
+                                            <widget class="QWidget" name="nfa_tab">
+                                                <attribute name="title">
+                                                    <string>最小化DFA</string>
+                                                </attribute>
+                                                <layout class="QGridLayout" name="gridLayout_10">
+                                                    <item row="0" column="1">
+                                                        <spacer name="verticalSpacer_7">
+                                                            <property name="orientation">
+                                                                <enum>Qt::Vertical</enum>
+                                                            </property>
+                                                            <property name="sizeType">
+                                                                <enum>QSizePolicy::Fixed</enum>
+                                                            </property>
+                                                            <property name="sizeHint" stdset="0">
+                                                                <size>
+                                                                    <width>1</width>
+                                                                    <height>1</height>
+                                                                </size>
+                                                            </property>
+                                                        </spacer>
+                                                    </item>
+                                                    <item row="1" column="0">
+                                                        <spacer name="horizontalSpacer_8">
+                                                            <property name="orientation">
+                                                                <enum>Qt::Horizontal</enum>
+                                                            </property>
+                                                            <property name="sizeType">
+                                                                <enum>QSizePolicy::Fixed</enum>
+                                                            </property>
+                                                            <property name="sizeHint" stdset="0">
+                                                                <size>
+                                                                    <width>1</width>
+                                                                    <height>1</height>
+                                                                </size>
+                                                            </property>
+                                                        </spacer>
+                                                    </item>
+                                                    <item row="1" column="1" rowspan="2" colspan="2">
+                                                        <widget class="QToolBox" name="minimized_dfa_box">
+                                                            <property name="toolTipDuration">
+                                                                <number>-2</number>
+                                                            </property>
+                                                            <property name="currentIndex">
+                                                                <number>0</number>
+                                                            </property>
+                                                            <widget class="QWidget" name="page_10">
+                                                                <property name="geometry">
+                                                                    <rect>
+                                                                        <x>0</x>
+                                                                        <y>0</y>
+                                                                        <width>302</width>
+                                                                        <height>384</height>
+                                                                    </rect>
+                                                                </property>
+                                                                <attribute name="label">
+                                                                    <string/>
+                                                                </attribute>
+                                                                <widget class="QListWidget" name="nfa_table_8">
+                                                                    <property name="geometry">
+                                                                        <rect>
+                                                                            <x>20</x>
+                                                                            <y>30</y>
+                                                                            <width>256</width>
+                                                                            <height>192</height>
+                                                                        </rect>
+                                                                    </property>
+                                                                </widget>
+                                                            </widget>
+                                                        </widget>
+                                                    </item>
+                                                    <item row="2" column="3">
+                                                        <spacer name="horizontalSpacer_9">
+                                                            <property name="orientation">
+                                                                <enum>Qt::Horizontal</enum>
+                                                            </property>
+                                                            <property name="sizeType">
+                                                                <enum>QSizePolicy::Fixed</enum>
+                                                            </property>
+                                                            <property name="sizeHint" stdset="0">
+                                                                <size>
+                                                                    <width>1</width>
+                                                                    <height>1</height>
+                                                                </size>
+                                                            </property>
+                                                        </spacer>
+                                                    </item>
+                                                    <item row="3" column="2">
+                                                        <spacer name="verticalSpacer_8">
+                                                            <property name="orientation">
+                                                                <enum>Qt::Vertical</enum>
+                                                            </property>
+                                                            <property name="sizeType">
+                                                                <enum>QSizePolicy::Fixed</enum>
+                                                            </property>
+                                                            <property name="sizeHint" stdset="0">
+                                                                <size>
+                                                                    <width>1</width>
+                                                                    <height>1</height>
+                                                                </size>
+                                                            </property>
+                                                        </spacer>
+                                                    </item>
+                                                </layout>
+                                            </widget>
+                                            <widget class="QWidget" name="lexcial_analysis_tab">
+                                                <attribute name="title">
+                                                    <string>词法分析</string>
+                                                </attribute>
+                                                <layout class="QGridLayout" name="gridLayout_2">
+                                                    <item row="1" column="0">
+                                                        <layout class="QVBoxLayout" name="verticalLayout_9">
+                                                            <item>
+                                                                <layout class="QHBoxLayout" name="horizontalLayout_5">
+                                                                    <item>
+                                                                        <widget class="QLineEdit"
+                                                                                name="source_file_input">
+                                                                            <property name="text">
+                                                                                <string extracomment=" "/>
+                                                                            </property>
+                                                                            <property name="placeholderText">
+                                                                                <string>源程序文件</string>
+                                                                            </property>
+                                                                        </widget>
+                                                                    </item>
+                                                                    <item>
+                                                                        <widget class="QPushButton"
+                                                                                name="select_source_file_button">
+                                                                            <property name="text">
+                                                                                <string>浏览…</string>
+                                                                            </property>
+                                                                        </widget>
+                                                                    </item>
+                                                                </layout>
+                                                            </item>
+                                                        </layout>
+                                                    </item>
+                                                    <item row="3" column="0">
+                                                        <widget class="QPlainTextEdit" name="lex_output">
+                                                            <property name="readOnly">
+                                                                <bool>true</bool>
+                                                            </property>
+                                                            <property name="overwriteMode">
+                                                                <bool>false</bool>
+                                                            </property>
+                                                        </widget>
+                                                    </item>
+                                                    <item row="0" column="0">
+                                                        <layout class="QHBoxLayout" name="horizontalLayout_3">
+                                                            <item>
+                                                                <widget class="QLineEdit" name="gcc_folder_input">
+                                                                    <property name="text">
+                                                                        <string extracomment=" "/>
+                                                                    </property>
+                                                                    <property name="placeholderText">
+                                                                        <string>GCC 路径，留空则使用环境变量</string>
+                                                                    </property>
+                                                                </widget>
+                                                            </item>
+                                                            <item>
+                                                                <widget class="QPushButton"
+                                                                        name="select_gcc_folder_button">
+                                                                    <property name="text">
+                                                                        <string>浏览…</string>
+                                                                    </property>
+                                                                </widget>
+                                                            </item>
+                                                        </layout>
+                                                    </item>
+                                                    <item row="2" column="0">
+                                                        <widget class="QPushButton" name="lexical_analyze_button">
+                                                            <property name="text">
+                                                                <string>进行词法分析</string>
+                                                            </property>
+                                                        </widget>
+                                                    </item>
+                                                </layout>
+                                            </widget>
+                                        </widget>
+                                    </item>
+                                </layout>
+                            </item>
+                            <item row="0" column="1">
+                                <spacer name="verticalSpacer_2">
+                                    <property name="orientation">
+                                        <enum>Qt::Vertical</enum>
+                                    </property>
+                                    <property name="sizeType">
+                                        <enum>QSizePolicy::Fixed</enum>
+                                    </property>
+                                    <property name="sizeHint" stdset="0">
+                                        <size>
+                                            <width>1</width>
+                                            <height>1</height>
+                                        </size>
+                                    </property>
+                                </spacer>
+                            </item>
+                            <item row="1" column="0">
+                                <spacer name="horizontalSpacer_2">
+                                    <property name="orientation">
+                                        <enum>Qt::Horizontal</enum>
+                                    </property>
+                                    <property name="sizeType">
+                                        <enum>QSizePolicy::Fixed</enum>
+                                    </property>
+                                    <property name="sizeHint" stdset="0">
+                                        <size>
+                                            <width>1</width>
+                                            <height>1</height>
+                                        </size>
+                                    </property>
+                                </spacer>
+                            </item>
+                            <item row="1" column="2">
+                                <spacer name="horizontalSpacer_3">
+                                    <property name="orientation">
+                                        <enum>Qt::Horizontal</enum>
+                                    </property>
+                                    <property name="sizeType">
+                                        <enum>QSizePolicy::Fixed</enum>
+                                    </property>
+                                    <property name="sizeHint" stdset="0">
+                                        <size>
+                                            <width>1</width>
+                                            <height>1</height>
+                                        </size>
+                                    </property>
+                                </spacer>
+                            </item>
+                        </layout>
+                    </widget>
+                    <widget class="QWidget" name="GrammarTab">
+                        <attribute name="title">
+                            <string>语法分析</string>
+                        </attribute>
+                        <layout class="QGridLayout" name="gridLayout_11">
+                            <item row="0" column="1">
+                                <spacer name="horizontalSpacer_18">
+                                    <property name="orientation">
+                                        <enum>Qt::Vertical</enum>
+                                    </property>
+                                    <property name="sizeType">
+                                        <enum>QSizePolicy::Fixed</enum>
+                                    </property>
+                                    <property name="sizeHint" stdset="0">
+                                        <size>
+                                            <width>1</width>
+                                            <height>1</height>
+                                        </size>
+                                    </property>
+                                </spacer>
+                            </item>
+                            <item row="1" column="0">
+                                <spacer name="horizontalSpacer_17">
+                                    <property name="orientation">
+                                        <enum>Qt::Horizontal</enum>
+                                    </property>
+                                    <property name="sizeType">
+                                        <enum>QSizePolicy::Fixed</enum>
+                                    </property>
+                                    <property name="sizeHint" stdset="0">
+                                        <size>
+                                            <width>1</width>
+                                            <height>1</height>
+                                        </size>
+                                    </property>
+                                </spacer>
+                            </item>
+                            <item row="1" column="1" rowspan="2" colspan="2">
+                                <layout class="QVBoxLayout" name="verticalLayout_7">
+                                    <item>
+                                        <layout class="QHBoxLayout" name="horizontalLayout_8">
+                                            <item>
+                                                <widget class="QLineEdit" name="bnf_path_input">
+                                                    <property name="placeholderText">
+                                                        <string>BNF文件路径</string>
+                                                    </property>
+                                                </widget>
+                                            </item>
+                                            <item>
+                                                <widget class="QPushButton" name="bnf_path_button">
+                                                    <property name="text">
+                                                        <string>浏览…</string>
+                                                    </property>
+                                                </widget>
+                                            </item>
+                                        </layout>
+                                    </item>
+                                    <item>
+                                        <layout class="QHBoxLayout" name="horizontalLayout_9">
+                                            <item>
+                                                <widget class="QLineEdit" name="lex_path_input">
+                                                    <property name="placeholderText">
+                                                        <string>单词编码文件，留空则使用词法分析程序的结果</string>
+                                                    </property>
+                                                </widget>
+                                            </item>
+                                            <item>
+                                                <widget class="QPushButton" name="lex_encode_button">
+                                                    <property name="text">
+                                                        <string>浏览…</string>
+                                                    </property>
+                                                </widget>
+                                            </item>
+                                        </layout>
+                                    </item>
+                                    <item>
+                                        <widget class="QPushButton" name="grammar_analyse_button">
+                                            <property name="text">
+                                                <string>开始分析</string>
+                                            </property>
+                                        </widget>
+                                    </item>
+                                    <item>
+                                        <widget class="QTabWidget" name="tabWidget">
+                                            <property name="currentIndex">
+                                                <number>5</number>
+                                            </property>
+                                            <widget class="QWidget" name="widget">
+                                                <attribute name="title">
+                                                    <string>文法化简</string>
+                                                </attribute>
+                                                <layout class="QGridLayout" name="gridLayout_16">
+                                                    <item row="0" column="2">
+                                                        <spacer name="verticalSpacer_15">
+                                                            <property name="orientation">
+                                                                <enum>Qt::Vertical</enum>
+                                                            </property>
+                                                            <property name="sizeType">
+                                                                <enum>QSizePolicy::Fixed</enum>
+                                                            </property>
+                                                            <property name="sizeHint" stdset="0">
+                                                                <size>
+                                                                    <width>1</width>
+                                                                    <height>1</height>
+                                                                </size>
+                                                            </property>
+                                                        </spacer>
+                                                    </item>
+                                                    <item row="2" column="3">
+                                                        <spacer name="horizontalSpacer_21">
+                                                            <property name="orientation">
+                                                                <enum>Qt::Horizontal</enum>
+                                                            </property>
+                                                            <property name="sizeType">
+                                                                <enum>QSizePolicy::Fixed</enum>
+                                                            </property>
+                                                            <property name="sizeHint" stdset="0">
+                                                                <size>
+                                                                    <width>1</width>
+                                                                    <height>1</height>
+                                                                </size>
+                                                            </property>
+                                                        </spacer>
+                                                    </item>
+                                                    <item row="3" column="1">
+                                                        <spacer name="verticalSpacer_16">
+                                                            <property name="orientation">
+                                                                <enum>Qt::Vertical</enum>
+                                                            </property>
+                                                            <property name="sizeType">
+                                                                <enum>QSizePolicy::Fixed</enum>
+                                                            </property>
+                                                            <property name="sizeHint" stdset="0">
+                                                                <size>
+                                                                    <width>1</width>
+                                                                    <height>1</height>
+                                                                </size>
+                                                            </property>
+                                                        </spacer>
+                                                    </item>
+                                                    <item row="1" column="0">
+                                                        <spacer name="horizontalSpacer_20">
+                                                            <property name="orientation">
+                                                                <enum>Qt::Horizontal</enum>
+                                                            </property>
+                                                            <property name="sizeType">
+                                                                <enum>QSizePolicy::Fixed</enum>
+                                                            </property>
+                                                            <property name="sizeHint" stdset="0">
+                                                                <size>
+                                                                    <width>1</width>
+                                                                    <height>1</height>
+                                                                </size>
+                                                            </property>
+                                                        </spacer>
+                                                    </item>
+                                                    <item row="1" column="1" rowspan="2" colspan="2">
+                                                        <widget class="QTableWidget" name="simplified_table"/>
+                                                    </item>
+                                                </layout>
+                                            </widget>
+                                            <widget class="QWidget" name="tab_2">
+                                                <attribute name="title">
+                                                    <string>消除左公因子及左递归</string>
+                                                </attribute>
+                                                <layout class="QGridLayout" name="gridLayout_15">
+                                                    <item row="0" column="1">
+                                                        <spacer name="verticalSpacer_17">
+                                                            <property name="orientation">
+                                                                <enum>Qt::Vertical</enum>
+                                                            </property>
+                                                            <property name="sizeType">
+                                                                <enum>QSizePolicy::Fixed</enum>
+                                                            </property>
+                                                            <property name="sizeHint" stdset="0">
+                                                                <size>
+                                                                    <width>1</width>
+                                                                    <height>1</height>
+                                                                </size>
+                                                            </property>
+                                                        </spacer>
+                                                    </item>
+                                                    <item row="1" column="0">
+                                                        <spacer name="horizontalSpacer_22">
+                                                            <property name="orientation">
+                                                                <enum>Qt::Horizontal</enum>
+                                                            </property>
+                                                            <property name="sizeType">
+                                                                <enum>QSizePolicy::Fixed</enum>
+                                                            </property>
+                                                            <property name="sizeHint" stdset="0">
+                                                                <size>
+                                                                    <width>1</width>
+                                                                    <height>1</height>
+                                                                </size>
+                                                            </property>
+                                                        </spacer>
+                                                    </item>
+                                                    <item row="1" column="1">
+                                                        <widget class="QTableWidget" name="left_removed_table"/>
+                                                    </item>
+                                                    <item row="1" column="2">
+                                                        <spacer name="horizontalSpacer_23">
+                                                            <property name="orientation">
+                                                                <enum>Qt::Horizontal</enum>
+                                                            </property>
+                                                            <property name="sizeType">
+                                                                <enum>QSizePolicy::Fixed</enum>
+                                                            </property>
+                                                            <property name="sizeHint" stdset="0">
+                                                                <size>
+                                                                    <width>1</width>
+                                                                    <height>1</height>
+                                                                </size>
+                                                            </property>
+                                                        </spacer>
+                                                    </item>
+                                                    <item row="2" column="1">
+                                                        <spacer name="verticalSpacer_18">
+                                                            <property name="orientation">
+                                                                <enum>Qt::Vertical</enum>
+                                                            </property>
+                                                            <property name="sizeType">
+                                                                <enum>QSizePolicy::Fixed</enum>
+                                                            </property>
+                                                            <property name="sizeHint" stdset="0">
+                                                                <size>
+                                                                    <width>1</width>
+                                                                    <height>1</height>
+                                                                </size>
+                                                            </property>
+                                                        </spacer>
+                                                    </item>
+                                                </layout>
+                                            </widget>
+                                            <widget class="QWidget" name="tab_5">
+                                                <attribute name="title">
+                                                    <string>First集</string>
+                                                </attribute>
+                                                <layout class="QGridLayout" name="gridLayout_13">
+                                                    <item row="0" column="1">
+                                                        <spacer name="verticalSpacer_19">
+                                                            <property name="orientation">
+                                                                <enum>Qt::Vertical</enum>
+                                                            </property>
+                                                            <property name="sizeType">
+                                                                <enum>QSizePolicy::Fixed</enum>
+                                                            </property>
+                                                            <property name="sizeHint" stdset="0">
+                                                                <size>
+                                                                    <width>1</width>
+                                                                    <height>1</height>
+                                                                </size>
+                                                            </property>
+                                                        </spacer>
+                                                    </item>
+                                                    <item row="1" column="0">
+                                                        <spacer name="horizontalSpacer_24">
+                                                            <property name="orientation">
+                                                                <enum>Qt::Horizontal</enum>
+                                                            </property>
+                                                            <property name="sizeType">
+                                                                <enum>QSizePolicy::Fixed</enum>
+                                                            </property>
+                                                            <property name="sizeHint" stdset="0">
+                                                                <size>
+                                                                    <width>1</width>
+                                                                    <height>1</height>
+                                                                </size>
+                                                            </property>
+                                                        </spacer>
+                                                    </item>
+                                                    <item row="1" column="1" rowspan="2">
+                                                        <widget class="QTableWidget" name="first_table"/>
+                                                    </item>
+                                                    <item row="2" column="2">
+                                                        <spacer name="horizontalSpacer_25">
+                                                            <property name="orientation">
+                                                                <enum>Qt::Horizontal</enum>
+                                                            </property>
+                                                            <property name="sizeType">
+                                                                <enum>QSizePolicy::Fixed</enum>
+                                                            </property>
+                                                            <property name="sizeHint" stdset="0">
+                                                                <size>
+                                                                    <width>1</width>
+                                                                    <height>1</height>
+                                                                </size>
+                                                            </property>
+                                                        </spacer>
+                                                    </item>
+                                                    <item row="3" column="1">
+                                                        <spacer name="verticalSpacer_20">
+                                                            <property name="orientation">
+                                                                <enum>Qt::Vertical</enum>
+                                                            </property>
+                                                            <property name="sizeType">
+                                                                <enum>QSizePolicy::Fixed</enum>
+                                                            </property>
+                                                            <property name="sizeHint" stdset="0">
+                                                                <size>
+                                                                    <width>1</width>
+                                                                    <height>1</height>
+                                                                </size>
+                                                            </property>
+                                                        </spacer>
+                                                    </item>
+                                                </layout>
+                                            </widget>
+                                            <widget class="QWidget" name="tab_6">
+                                                <attribute name="title">
+                                                    <string>Follow集</string>
+                                                </attribute>
+                                                <layout class="QGridLayout" name="gridLayout_14">
+                                                    <item row="0" column="1">
+                                                        <spacer name="verticalSpacer_21">
+                                                            <property name="orientation">
+                                                                <enum>Qt::Vertical</enum>
+                                                            </property>
+                                                            <property name="sizeType">
+                                                                <enum>QSizePolicy::Fixed</enum>
+                                                            </property>
+                                                            <property name="sizeHint" stdset="0">
+                                                                <size>
+                                                                    <width>1</width>
+                                                                    <height>1</height>
+                                                                </size>
+                                                            </property>
+                                                        </spacer>
+                                                    </item>
+                                                    <item row="1" column="0">
+                                                        <spacer name="horizontalSpacer_26">
+                                                            <property name="orientation">
+                                                                <enum>Qt::Horizontal</enum>
+                                                            </property>
+                                                            <property name="sizeType">
+                                                                <enum>QSizePolicy::Fixed</enum>
+                                                            </property>
+                                                            <property name="sizeHint" stdset="0">
+                                                                <size>
+                                                                    <width>1</width>
+                                                                    <height>1</height>
+                                                                </size>
+                                                            </property>
+                                                        </spacer>
+                                                    </item>
+                                                    <item row="1" column="1" colspan="2">
+                                                        <widget class="QTableWidget" name="follow_table"/>
+                                                    </item>
+                                                    <item row="1" column="3">
+                                                        <spacer name="horizontalSpacer_27">
+                                                            <property name="orientation">
+                                                                <enum>Qt::Horizontal</enum>
+                                                            </property>
+                                                            <property name="sizeType">
+                                                                <enum>QSizePolicy::Fixed</enum>
+                                                            </property>
+                                                            <property name="sizeHint" stdset="0">
+                                                                <size>
+                                                                    <width>1</width>
+                                                                    <height>1</height>
+                                                                </size>
+                                                            </property>
+                                                        </spacer>
+                                                    </item>
+                                                    <item row="2" column="2">
+                                                        <spacer name="verticalSpacer_22">
+                                                            <property name="orientation">
+                                                                <enum>Qt::Vertical</enum>
+                                                            </property>
+                                                            <property name="sizeType">
+                                                                <enum>QSizePolicy::Fixed</enum>
+                                                            </property>
+                                                            <property name="sizeHint" stdset="0">
+                                                                <size>
+                                                                    <width>1</width>
+                                                                    <height>1</height>
+                                                                </size>
+                                                            </property>
+                                                        </spacer>
+                                                    </item>
+                                                </layout>
+                                            </widget>
+                                            <widget class="QWidget" name="tab_7">
+                                                <attribute name="title">
+                                                    <string>LL (1) 分析表</string>
+                                                </attribute>
+                                                <layout class="QGridLayout" name="gridLayout_12">
+                                                    <item row="0" column="2">
+                                                        <spacer name="verticalSpacer_23">
+                                                            <property name="orientation">
+                                                                <enum>Qt::Vertical</enum>
+                                                            </property>
+                                                            <property name="sizeType">
+                                                                <enum>QSizePolicy::Fixed</enum>
+                                                            </property>
+                                                            <property name="sizeHint" stdset="0">
+                                                                <size>
+                                                                    <width>1</width>
+                                                                    <height>1</height>
+                                                                </size>
+                                                            </property>
+                                                        </spacer>
+                                                    </item>
+                                                    <item row="1" column="0">
+                                                        <spacer name="horizontalSpacer_28">
+                                                            <property name="orientation">
+                                                                <enum>Qt::Horizontal</enum>
+                                                            </property>
+                                                            <property name="sizeType">
+                                                                <enum>QSizePolicy::Fixed</enum>
+                                                            </property>
+                                                            <property name="sizeHint" stdset="0">
+                                                                <size>
+                                                                    <width>1</width>
+                                                                    <height>1</height>
+                                                                </size>
+                                                            </property>
+                                                        </spacer>
+                                                    </item>
+                                                    <item row="1" column="1" colspan="2">
+                                                        <widget class="QTableWidget" name="ll1_table"/>
+                                                    </item>
+                                                    <item row="1" column="3">
+                                                        <spacer name="horizontalSpacer_29">
+                                                            <property name="orientation">
+                                                                <enum>Qt::Horizontal</enum>
+                                                            </property>
+                                                            <property name="sizeType">
+                                                                <enum>QSizePolicy::Fixed</enum>
+                                                            </property>
+                                                            <property name="sizeHint" stdset="0">
+                                                                <size>
+                                                                    <width>1</width>
+                                                                    <height>1</height>
+                                                                </size>
+                                                            </property>
+                                                        </spacer>
+                                                    </item>
+                                                    <item row="2" column="1">
+                                                        <spacer name="verticalSpacer_24">
+                                                            <property name="orientation">
+                                                                <enum>Qt::Vertical</enum>
+                                                            </property>
+                                                            <property name="sizeType">
+                                                                <enum>QSizePolicy::Fixed</enum>
+                                                            </property>
+                                                            <property name="sizeHint" stdset="0">
+                                                                <size>
+                                                                    <width>1</width>
+                                                                    <height>1</height>
+                                                                </size>
+                                                            </property>
+                                                        </spacer>
+                                                    </item>
+                                                </layout>
+                                            </widget>
+                                            <widget class="QWidget" name="tab_8">
+                                                <attribute name="title">
+                                                    <string>语法树</string>
+                                                </attribute>
+                                                <layout class="QGridLayout" name="gridLayout_6">
+                                                    <item row="0" column="1">
+                                                        <spacer name="verticalSpacer_9">
+                                                            <property name="orientation">
+                                                                <enum>Qt::Vertical</enum>
+                                                            </property>
+                                                            <property name="sizeType">
+                                                                <enum>QSizePolicy::Fixed</enum>
+                                                            </property>
+                                                            <property name="sizeHint" stdset="0">
+                                                                <size>
+                                                                    <width>1</width>
+                                                                    <height>1</height>
+                                                                </size>
+                                                            </property>
+                                                        </spacer>
+                                                    </item>
+                                                    <item row="1" column="0">
+                                                        <spacer name="horizontalSpacer_10">
+                                                            <property name="orientation">
+                                                                <enum>Qt::Horizontal</enum>
+                                                            </property>
+                                                            <property name="sizeType">
+                                                                <enum>QSizePolicy::Fixed</enum>
+                                                            </property>
+                                                            <property name="sizeHint" stdset="0">
+                                                                <size>
+                                                                    <width>1</width>
+                                                                    <height>1</height>
+                                                                </size>
+                                                            </property>
+                                                        </spacer>
+                                                    </item>
+                                                    <item row="1" column="1" rowspan="2" colspan="2">
+                                                        <widget class="QTreeWidget" name="syntax_tree"/>
+                                                    </item>
+                                                    <item row="2" column="3">
+                                                        <spacer name="horizontalSpacer_11">
+                                                            <property name="orientation">
+                                                                <enum>Qt::Horizontal</enum>
+                                                            </property>
+                                                            <property name="sizeType">
+                                                                <enum>QSizePolicy::Fixed</enum>
+                                                            </property>
+                                                            <property name="sizeHint" stdset="0">
+                                                                <size>
+                                                                    <width>1</width>
+                                                                    <height>1</height>
+                                                                </size>
+                                                            </property>
+                                                        </spacer>
+                                                    </item>
+                                                    <item row="3" column="2">
+                                                        <spacer name="verticalSpacer_10">
+                                                            <property name="orientation">
+                                                                <enum>Qt::Vertical</enum>
+                                                            </property>
+                                                            <property name="sizeType">
+                                                                <enum>QSizePolicy::Fixed</enum>
+                                                            </property>
+                                                            <property name="sizeHint" stdset="0">
+                                                                <size>
+                                                                    <width>1</width>
+                                                                    <height>1</height>
+                                                                </size>
+                                                            </property>
+                                                        </spacer>
+                                                    </item>
+                                                </layout>
+                                            </widget>
+                                        </widget>
+                                    </item>
+                                </layout>
+                            </item>
+                            <item row="2" column="3">
+                                <spacer name="horizontalSpacer_16">
+                                    <property name="orientation">
+                                        <enum>Qt::Horizontal</enum>
+                                    </property>
+                                    <property name="sizeType">
+                                        <enum>QSizePolicy::Fixed</enum>
+                                    </property>
+                                    <property name="sizeHint" stdset="0">
+                                        <size>
+                                            <width>1</width>
+                                            <height>1</height>
+                                        </size>
+                                    </property>
+                                </spacer>
+                            </item>
+                            <item row="3" column="2">
+                                <spacer name="horizontalSpacer_19">
+                                    <property name="orientation">
+                                        <enum>Qt::Vertical</enum>
+                                    </property>
+                                    <property name="sizeType">
+                                        <enum>QSizePolicy::Fixed</enum>
+                                    </property>
+                                    <property name="sizeHint" stdset="0">
+                                        <size>
+                                            <width>1</width>
+                                            <height>1</height>
+                                        </size>
+                                    </property>
+                                </spacer>
+                            </item>
+                        </layout>
+                    </widget>
+                </widget>
+            </item>
+        </layout>
+    </widget>
+    <resources/>
+    <connections/>
+</ui>

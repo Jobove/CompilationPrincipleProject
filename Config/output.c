@@ -144,7 +144,7 @@ char try_match(FILE *output, const char *content, int *p) {
         while (content[*p] != '\n' && content[*p] != '\0')
             ++*p;
         r = *p;
-        output_comment(output, content, l, r);
+//        output_comment(output, content, l, r);
         return 1;
     }
     // try keywords.
@@ -209,6 +209,7 @@ int main(int argc, char **argv) {
         for (int i = 0; i < total_dfa; ++i) {
             // switch between DFAs.
             switch (i) {
+
                 case 0: {
                     int const end_len = 1, end[] = {2};
                     int state = 1;
@@ -223,8 +224,8 @@ int main(int argc, char **argv) {
                             case '\v': {
                                 if (check_end(end, end_len, state)) {
                                     int r = pos - 1;
-                                    char *tmp = (char *) malloc(sizeof(char) * (r - l + 1 + sizeof(token)) + 1);
-                                    memset(tmp, 0, sizeof(char) * (r - l + 1 + sizeof(token)) + 1);
+                                    char *tmp = (char *) malloc(sizeof(char) * (r - l + 1 + strlen(token)) + 1);
+                                    memset(tmp, 0, sizeof(char) * (r - l + 1 + strlen(token)) + 1);
                                     memmove(tmp, content + l, sizeof(char) * (r - l + 1));
                                     strcat(tmp, " ");
                                     strcat(tmp, token);
@@ -746,8 +747,8 @@ int main(int argc, char **argv) {
                             case '\v': {
                                 if (check_end(end, end_len, state)) {
                                     int r = pos - 1;
-                                    char *tmp = (char *) malloc(sizeof(char) * (r - l + 1 + sizeof(token)) + 1);
-                                    memset(tmp, 0, sizeof(char) * (r - l + 1 + sizeof(token)) + 1);
+                                    char *tmp = (char *) malloc(sizeof(char) * (r - l + 1 + strlen(token)) + 1);
+                                    memset(tmp, 0, sizeof(char) * (r - l + 1 + strlen(token)) + 1);
                                     memmove(tmp, content + l, sizeof(char) * (r - l + 1));
                                     strcat(tmp, " ");
                                     strcat(tmp, token);
